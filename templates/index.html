@@ -6,12 +6,27 @@
 
 
 <script>
+    let second = false
     function ja() {
-      document.getElementById("liebstdu").innerHTML = "Würdest du sagen {{ thing }} ist dein Hobby?";
-      document.getElementById("ja").remove();
-      document.getElementById("nein").remove();
+        if (second) {
+            removeBtns()
+            document.getElementById("liebstdu").innerHTML = "Das ist ja fantastisch.";
+        } else {
+            document.getElementById("liebstdu").innerHTML = "Würdest du sagen {{ thing }} ist dein Hobby?";
+        }
+        second = true
     }
     function nein() {
-      location.reload()
+        if (second) {
+            removeBtns()
+            document.getElementById("liebstdu").innerHTML = "Ok.";
+        } else {
+            location.reload()
+        }
+        
+    }
+    function removeBtns() {
+        document.getElementById("ja").remove();
+        document.getElementById("nein").remove();
     }
 </script>
