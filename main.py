@@ -27,7 +27,7 @@ things = [
 
 @app.route('/')
 @app.route('/<thing>')
-def home(thing=None):
+def home(thing=None, plural=0):
     if not thing:
         selector = randint(0, len(things)-1)
         thing = things[selector][0]
