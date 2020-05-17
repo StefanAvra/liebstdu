@@ -12,7 +12,11 @@
             removeBtns()
             document.getElementById("liebstdu").innerHTML = "Das ist ja fantastisch.";
         } else {
+            {% if plural %}
+            document.getElementById("liebstdu").innerHTML = "Würdest du sagen {{ thing }} sind dein Hobby?";
+            {% else %}
             document.getElementById("liebstdu").innerHTML = "Würdest du sagen {{ thing }} ist dein Hobby?";
+            {% endif %}
         }
         second = true
     }

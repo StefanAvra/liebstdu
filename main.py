@@ -16,7 +16,12 @@ things = [
     ('Dreads', 1),
     ('Sonne', 0),
     ('Japan', 0),
-    ('Bolognese', 0)
+    ('Bolognese', 0),
+    ('Tee', 0),
+    ('Kaffee', 0),
+    ('Spiele', 1),
+    ('Bärlauch', 0),
+    ('Pflanzen', 1)
 ]
 
 
@@ -26,5 +31,6 @@ def home(thing=None):
     if not thing:
         selector = randint(0, len(things)-1)
         thing = things[selector][0]
+        plural = things[selector][1]
     thing = thing.capitalize()
-    return render_template('index.html', thing=thing)
+    return render_template('index.html', thing=thing, plural=plural)
