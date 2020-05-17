@@ -1,0 +1,17 @@
+<!doctype html>
+<title>Liebst du {{ thing }}?</title>
+<p id="liebstdu">Liebst du {{ thing }}?</p>
+<button id="ja" onclick="ja()">Ja</button>
+<button id="nein" onclick="nein()">Nein</button>
+
+
+<script>
+    function ja() {
+      document.getElementById("liebstdu").innerHTML = "Würdest du sagen {{ thing }} ist dein Hobby?";
+      document.getElementById("ja").remove();
+      document.getElementById("nein").remove();
+    }
+    function nein() {
+      location.reload()
+    }
+</script>
