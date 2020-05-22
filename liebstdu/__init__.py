@@ -34,3 +34,7 @@ def home(thing=None, plural=0):
         plural = things[selector][1]
     thing = thing.capitalize()
     return render_template('index.html', thing=thing, plural=plural)
+
+def getApp():
+    return app
+
