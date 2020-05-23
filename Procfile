@@ -1,1 +1,1 @@
-web: gunicorn app:liebstdu
+web: gunicorn app:app
