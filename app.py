@@ -38,6 +38,3 @@ def home(thing=None, plural=0):
 def getApp():
     return app
 
-if __name__ == '__main__':
-    app.run(threaded=True, port=5000)
-
