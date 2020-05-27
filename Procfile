@@ -1,1 +1,1 @@
-web: gunicorn app:liebstdu.py
+web: gunicorn liebstdu:app
