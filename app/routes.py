@@ -1,7 +1,6 @@
-from flask import Flask, render_template
+from app import app
+from flask import render_template
 from random import randint
-
-app = Flask(__name__)
 
 things = [
     ('Fun', 0),
@@ -24,17 +23,12 @@ things = [
     ('Pflanzen', 1)
 ]
 
-
 @app.route('/')
 @app.route('/<thing>')
-def home(thing=None, plural=0):
+def index(thing=None, plural=0):
     if not thing:
         selector = randint(0, len(things)-1)
         thing = things[selector][0]
         plural = things[selector][1]
-    thing = thing.capitalize()
+        thing = thing.capitalize()
     return render_template('index.html', thing=thing, plural=plural)
-
-def getApp():
-    return app
-
