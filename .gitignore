@@ -6,3 +6,4 @@ Pipfile
 
 .vscode
 app.db
+instance/config.py
