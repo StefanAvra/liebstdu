@@ -9,20 +9,6 @@ import names
 
 @app.route("/")
 def index():
-    user_id = session.get("user_id")
-    if user_id:
-        user = User.query.get(user_id)
-        if user:
-            # success
-            pass
-        else:
-            session.pop(user_id, None)
-    else:
-        u = User(name=names.get_full_name())
-        db.session.add(u)
-        db.session.commit()
-        session["user_id"] = u.id
-        session.permanent = True
     row_count = Thing.query.count()
     thing = Thing.query.offset(randint(0, row_count - 1)).first()
     return {"id": thing.id, "name": thing.name, "plural": thing.plural}
@@ -82,14 +68,11 @@ def vote(p_thing=None):
         user_id = session.get("user_id")
         if user_id:
             user = User.query.get(user_id)
-            if user:
-                # success
-                pass
-            else:
+            if not user:
                 return "no user", 400
         else:
             return "no user", 400
-            
+
         thing = Thing.query.filter(Thing.name.ilike(p_thing)).first()
         if not thing:
             return f"no thing '{p_thing}'", 400

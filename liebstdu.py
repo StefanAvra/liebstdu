@@ -1,9 +1,29 @@
 from app import app, db
 from app.models import User, Thing, Vote
+from flask import session
+import sys
+
 
 @app.shell_context_processor
 def make_shell_context():
     return {'db': db, 'User': User, 'Thing': Thing, 'Vote': Vote}
+
+
+@app.before_request
+def check_user_session():
+    user_id = session.get("user_id")
+    if user_id:
+        user = User.query.get(user_id)
+        print(f'user {user.name} logged', file=sys.stdout)
+        if not user:
+            session.pop(user_id, None)
+    else:
+        u = User(name=names.get_full_name())
+        db.session.add(u)
+        db.session.commit()
+        session["user_id"] = u.id
+        session.permanent = True
+        print(f'user {u.name} created', file=sys.stdout)
 
 # helper function I used to init default values manually. todo: add to models?
 def init_default_things():
