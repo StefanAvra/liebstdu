@@ -1,7 +1,12 @@
 from app import app, db
 from app.models import User, Thing, Vote
 from flask import session
-import sys
+import names
+from flask_cors import CORS
+
+
+# enable CORS
+CORS(app, resources={r'/*': {'origins': '*', 'supports_credentials': True}})
 
 
 @app.shell_context_processor
@@ -14,16 +19,16 @@ def check_user_session():
     user_id = session.get("user_id")
     if user_id:
         user = User.query.get(user_id)
-        print(f'user {user.name} logged', file=sys.stdout)
+        print(f'user {user.id} {user.name} logged')
         if not user:
             session.pop(user_id, None)
     else:
-        u = User(name=names.get_full_name())
-        db.session.add(u)
+        user = User(name=names.get_full_name())
+        db.session.add(user)
         db.session.commit()
-        session["user_id"] = u.id
+        session["user_id"] = user.id
         session.permanent = True
-        print(f'user {u.name} created', file=sys.stdout)
+        print(f'user {user.id} {user.name} created')
 
 # helper function I used to init default values manually. todo: add to models?
 def init_default_things():

@@ -4,7 +4,6 @@ from random import randint
 from datetime import datetime
 from app.models import User, Thing, Vote
 from sqlalchemy.sql.expression import func, select
-import names
 
 
 @app.route("/")
